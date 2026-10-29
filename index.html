@@ -5,54 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Материалы курса (Резервная площадка)</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; line-height: 1.6; background-color: #fcfcfc; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; margin-bottom: 30px; }
-        
-        /* Стили ГЛАВНОГО аккордеона (Модули) */
-        .module-accordion { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .module-accordion[open] { border-color: #3498db; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1); }
-        
-        .module-title { font-size: 16px; font-weight: bold; color: #2c3e50; padding: 18px 20px; cursor: pointer; background: #f8fafc; list-style: none; display: flex; justify-content: space-between; align-items: center; margin: 0; }
-        .module-title::-webkit-details-marker { display: none; }
-        .module-title::after { content: "▼"; font-size: 12px; color: #94a3b8; transition: transform 0.2s; }
-        .module-accordion[open] .module-title::after { transform: rotate(180deg); color: #3498db; }
-        .module-title:hover { background: #f1f5f9; }
-        
-        .module-content { padding: 15px 20px; border-top: 1px solid #e2e8f0; background: #ffffff; }
+        /* ЦВЕТОВАЯ ПАЛИТРА ДЛЯ СВЕТЛОЙ ТЕМЫ */
+        :root {
+            --bg-color: #f0f7ff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --heading-color: #0f172a;
+            --border-heading: #cbd5e1;
+            
+            --grid-color: rgba(37, 99, 235, 0.12);
+            
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --card-header-bg: #f8fafc;
+            --card-header-hover: #f1f5f9;
+            
+            --accent-active: #3b82f6;
+            --accent-shadow: rgba(59, 130, 246, 0.1);
+            
+            --nested-bg: #f8fafc;
+            --nested-border: #e2e8f0;
+            --nested-active-border: #64748b;
+        }
 
-        /* Стили ВЛОЖЕННОГО аккордеона (Темы внутри модуля) */
-        .topic-accordion { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 10px; overflow: hidden; }
-        .topic-accordion[open] { border-color: #475569; background: #ffffff; }
+        /* ЦВЕТОВАЯ ПАЛИТРА ДЛЯ ТЕМНОЙ ТЕМЫ */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-main: #cbd5e1;
+                --text-muted: #94a3b8;
+                --heading-color: #f8fafc;
+                --border-heading: #334155;
+                
+                --grid-color: rgba(59, 130, 246, 0.09); /* Утонченная ночная сетка */
+                
+                --card-bg: #1e293b;
+                --card-border: #334155;
+                --card-header-bg: #1e293b;
+                --card-header-hover: #334155;
+                
+                --accent-active: #3b82f6;
+                --accent-shadow: rgba(59, 130, 246, 0.25);
+                
+                --nested-bg: #0f172a;
+                --nested-border: #334155;
+                --nested-active-border: #94a3b8;
+            }
+        }
+
+        /* ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
         
-        .topic-title { font-size: 14px; font-weight: 600; color: #334155; padding: 12px 15px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; margin: 0; }
+        h1 { 
+            color: var(--heading-color); 
+            border-bottom: 2px solid var(--border-heading); 
+            padding-bottom: 10px; 
+            margin-bottom: 8px; 
+        }
+        
+        /* СТИЛИ ГЛАВНОГО АККОРДЕОНА (Модули) */
+        .module-accordion { 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 8px; 
+            margin-bottom: 16px; 
+            overflow: hidden; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+        }
+        .module-accordion[open] { 
+            border-color: var(--accent-active); 
+            box-shadow: 0 4px 12px var(--accent-shadow); 
+        }
+        
+        .module-title { 
+            font-size: 16px; 
+            font-weight: bold; 
+            color: var(--heading-color); 
+            padding: 18px 20px; 
+            cursor: pointer; 
+            background: var(--card-header-bg); 
+            list-style: none; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin: 0; 
+            user-select: none;
+        }
+        .module-title::-webkit-details-marker { display: none; }
+        .module-title::after { content: "▼"; font-size: 12px; color: var(--text-muted); transition: transform 0.2s; }
+        .module-accordion[open] .module-title::after { transform: rotate(180deg); color: var(--accent-active); }
+        .module-title:hover { background: var(--card-header-hover); }
+        
+        .module-content { padding: 15px 20px; border-top: 1px solid var(--card-border); background: var(--card-bg); }
+
+        /* СТИЛИ ВЛОЖЕННОГО АККОРДЕОНА (Темы внутри модуля) */
+        .topic-accordion { background: var(--nested-bg); border: 1px solid var(--nested-border); border-radius: 6px; margin-bottom: 10px; overflow: hidden; }
+        .topic-accordion[open] { border-color: var(--nested-active-border); background: var(--card-bg); }
+        
+        .topic-title { font-size: 14px; font-weight: 600; color: var(--text-main); padding: 12px 15px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; margin: 0; }
         .topic-title::-webkit-details-marker { display: none; }
-        .topic-title::after { content: "▶"; font-size: 10px; color: #94a3b8; transition: transform 0.2s; }
-        .topic-accordion[open] .topic-title::after { transform: rotate(90deg); color: #475569; }
-        .topic-title:hover { background: #f1f5f9; }
+        .topic-title::after { content: "▶"; font-size: 10px; color: var(--text-muted); transition: transform 0.2s; }
+        .topic-accordion[open] .topic-title::after { transform: rotate(90deg); color: var(--nested-active-border); }
+        .topic-title:hover { background: var(--card-header-hover); }
         
-        .topic-content { padding: 15px; border-top: 1px solid #e2e8f0; background: #ffffff; font-size: 14px; }
+        .topic-content { padding: 15px; border-top: 1px solid var(--nested-border); background: var(--card-bg); font-size: 14px; }
         .topic-content ul { padding-left: 20px; margin: 10px 0; }
         
-        /* КНОПКИ РАЗНЫХ ЦВЕТОВ ПО ТИПАМ МАТЕРИАЛОВ */
+        /* КНОПКИ ДЛЯ МАТЕРИАЛОВ */
         .btn-group { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
         .btn { display: inline-block; color: white; padding: 8px 14px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 13px; transition: opacity 0.15s ease, transform 0.1s ease; }
         .btn:hover { opacity: 0.9; }
         .btn:active { transform: scale(0.98); }
         
-        /* 📺 Ссылка на видеозапись занятия */
-        .btn-video { background-color: #e74c3c; } 
-        
-        /* 📊 Презентация курса */
-        .btn-presentation { background-color: #3498db; } 
-        
-        /* 📝 Дополнительная инструкция (Текстовый файл / PDF) */
-        .btn-instruction { background-color: #2ecc71; } 
-        
-        /* 📂 Дополнительные вложения / материалы / стартовые наборы / изображения */
-        .btn-attachment { background-color: #f39c12; } 
+        .btn-video { background-color: #ef4444; } 
+        .btn-presentation { background-color: #3b82f6; } 
+        .btn-instruction { background-color: #10b981; } 
+        .btn-attachment { background-color: #f59e0b; } 
+
+        /* ФОНОВАЯ ВЕКТОРНАЯ СЕТКА */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            color: var(--grid-color); /* Связываем цвет линий с CSS-переменной */
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    <!-- Фон -->
+    <svg class="grid-background" xmlns="http://w3.org" width="100%" height="100%">
+        <defs>
+            <pattern id="grid" width="45" height="45" patternUnits="userSpaceOnUse">
+                <!-- stroke-width="1" делает линии тонкими и аккуратными -->
+                <path d="M 45 0 L 0 0 0 45" fill="none" stroke="currentColor" stroke-width="2" />
+            </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
 
     <h1>📚 Цифровая кафедра "Веб-технологии"</h1>
     <p style="color: #64748b; margin-bottom: 30px;">Уважаемые студенты, это резервная страница материалов курса. Нажмите на нужный модуль ниже, чтобы открыть список занятий.</p>
@@ -87,7 +189,7 @@
                         <a href="https://vk.ru/video835393958_456239026?list=ln-tbzhY9PqPK4SWKdOIQ" class="btn btn-video" target="_blank">📺 Видео лекции (Занятие 0610)</a>
                         <a href="https://vk.ru/video835393958_456239027?list=ln-1aZsMlvHEQKIri9NZV" class="btn btn-video" target="_blank">📺 Видео лекции (Занятие 0910)</a>
                         <a href="https://drive.google.com/file/d/1pTyA5yYWGFxY6AWgkjGHwVQ4UpuPO7WU/view?usp=sharing" class="btn btn-presentation" target="_blank">📊 Презентация (PDF)</a>
-                        <a href="https://docs.google.com/document/d/1f-SCdCe2vuuJQxdLdmz-c5KrTQINgLTo/edit?usp=sharing&ouid=116298905364242876911&rtpof=true&sd=true" class="btn btn-instruction" target="_blank">📝 Инструкция по настройке окружения </a>
+                        <a href="https://docs.google.com/document/d/1f-SCdCe2vuuJQxdLdmz-c5KrTQINgLTo/edit?usp=sharing&ouid=116298905364242876911&rtpof=true&sd=true" class="btn btn-instruction" target="_blank">📝 Инструкция по настройке окружения (PDF)</a>
                         <a href="https://drive.google.com/file/d/1oIvtNt0reO9s1CE3kifSmGX3TcvbWnjX/view?usp=sharing" class="btn btn-attachment" target="_blank">📂 Стартовый набор</a>
                     </div>
 
